@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From ntbtyn's antifan</title>
+<style>
+/* CSS cho trang "index" */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background: url('badmorning.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.rose {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    overflow: hidden;
+}
+
+.rose img {
+    position: absolute;
+    width: 30%;
+    height: 35%;
+    opacity: 0;
+}
+
+.rose img:nth-child(1) {
+    top: 0;
+    right: 70%;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.rose img:nth-child(3) {
+    bottom: 30%;
+    right: 10%;
+    transition: opacity 2s ease-in-out;
+}
+
+.rose img:nth-child(2) {
+    top: 0;
+    left: 70%;
+    transition: opacity 2.5s ease-in-out;
+}
+
+.rose img:nth-child(4) {
+    bottom: 30%;
+    left: 10%;
+    transition: opacity 1s ease-in-out;
+}
+
+.rose img:nth-child(5) {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: opacity 1.5s ease-in-out;
+}
+
+.rose img:nth-child(6) {
+    bottom: 60%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25%;
+    height: 30%;
+    transition: opacity 0s ease-in-out;
+}
+
+.rose:hover img {
+    opacity: 1;
+}
+
+.snowflake {
+    position: absolute;
+    color: #fff;
+    font-size: 20px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+.rose span {
+    position: absolute;
+    color: white;
+    font-size: 48px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.rose:hover span {
+    opacity: 1;
+}
+
+#nextButton {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #ff1493;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#nextButton:hover {
+    background-color: #ff1493;
+    color: white;
+}
+
+/* CSS cho trang "heart" */
+#heartPage {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    color: #ea80b0;
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.heart {
+    display: inline-block;
+    color: red;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+</style>
+</head>
+<body>
+
+
+<script>
+// Script tạo hiệu ứng tuyết rơi cho trang "index"
+document.addEventListener("DOMContentLoaded", function () {
+    let container = document.querySelector("body");
+    let nextButton = document.getElementById("nextButton");
+
+    function createSnowflake() {
+        let snowflake = document.createElement("div");
+        snowflake.classList.add("snowflake");
+        snowflake.style.left = Math.random() * window.innerWidth + "px";
+        snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
+        snowflake.innerHTML = "😾  😡  👎  💢";
+
+        container.appendChild(snowflake);
+
+        setTimeout(() => {
+            snowflake.remove();
+        }, 5000);
+    }
+
+    setInterval(createSnowflake, 100);
+
+    // Hiển thị từng chữ 'cink', 'ngoan', 'iu'
+    setTimeout(() => {
+        document.getElementById('cink').style.opacity = 1;
+    }, 500);
+    setTimeout(() => {
+        document.getElementById('ngoan').style.opacity = 1;
+    }, 1000);
+    setTimeout(() => {
+        document.getElementById('iu').style.opacity = 1;
+    }, 1500);
+    setTimeout(() => {
+        document.getElementById('cink').style.opacity = 0;
+        document.getElementById('ngoan').style.opacity = 0;
+        document.getElementById('iu').style.opacity = 0;
+    }, 4000);
+    // Sau 4 giây biến mất các dòng chữ, hiển thị tuần tự các hình ảnh
+    setTimeout(() => {
+        document.getElementById('cink').style.opacity = 0;
+        document.getElementById('ngoan').style.opacity = 0;
+        document.getElementById('iu').style.opacity = 0;
+
+        setTimeout(() => {
+            document.querySelectorAll('.rose img').forEach((img, index) => {
+                setTimeout(() => {
+                    img.style.opacity = 1;
+                }, index * 1000); // Hiển thị tuần tự mỗi hình ảnh sau 1 giây
+            });
+        }, 1000);
+
+    }, 4000);
+    // Khi bấm vào nút "Next", chuyển sang trang "heart"
+    nextButton.addEventListener("click", function () {
+        document.getElementById("indexPage").style.display = "none";
+        document.getElementById("heartPage").style.display = "block";
+        startHeartAnimation();
+    });
+
+    // Tự động chuyển trang sau 6 giây
+    setTimeout(() => {
+        nextButton.click();
+    }, 6000);
+});
+</script>
+
+</body>
+</html>
