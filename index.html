@@ -3,244 +3,187 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>From ntbtyn's antifan</title>
+<title>Good Morning Animation</title>
+<!-- Thêm link đến Google Fonts cho font chữ nghệ thuật -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+
 <style>
-/* CSS cho trang "index" */
+/* CSS cho hiệu ứng tổng thể */
 body {
     margin: 0;
     padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: url('morning.jpg') no-repeat center center fixed;
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    background: url('badmorning.jpg') no-repeat center center fixed;
-    background-size: cover;
+    flex-direction: column;
 }
 
-.rose {
+/* CSS cho vòng tròn bao quanh dòng chữ */
+.sun-circle {
     position: relative;
-    width: 800px;
-    height: 600px;
-    overflow: hidden;
+    width: 300px; /* Kích thước vòng tròn */
+    height: 300px;
+    border-radius: 50%;
+    background-color: rgba(255, 223, 51, 0.3); /* Màu vàng nhạt */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: pulse 2s infinite;
+    overflow: visible; /* Đảm bảo các tia nắng nằm ngoài vòng tròn */
 }
 
-.rose img {
+/* Hiệu ứng vòng tròn phồng lên */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Tạo các tia nắng xung quanh vòng tròn */
+.sun-ray {
     position: absolute;
-    width: 30%;
-    height: 35%;
-    opacity: 0;
-}
-
-.rose img:nth-child(1) {
-    top: 0;
-    right: 70%;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.rose img:nth-child(3) {
-    bottom: 30%;
-    right: 10%;
-    transition: opacity 2s ease-in-out;
-}
-
-.rose img:nth-child(2) {
-    top: 0;
-    left: 70%;
-    transition: opacity 2.5s ease-in-out;
-}
-
-.rose img:nth-child(4) {
-    bottom: 30%;
-    left: 10%;
-    transition: opacity 1s ease-in-out;
-}
-
-.rose img:nth-child(5) {
-    bottom: 0;
+    font-size: 40px;  /* Kích thước biểu tượng tia nắng */
+    top: 50%; /* Đặt chúng vào vị trí trung tâm của vòng tròn */
     left: 50%;
-    transform: translateX(-50%);
-    transition: opacity 1.5s ease-in-out;
+    transform-origin: 50% 100%; /* Đặt điểm gốc xoay ở đáy tia nắng */
+    animation: ray 3s linear infinite;
 }
 
-.rose img:nth-child(6) {
-    bottom: 60%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 25%;
-    height: 30%;
-    transition: opacity 0s ease-in-out;
-}
-
-.rose:hover img {
-    opacity: 1;
-}
-
-.snowflake {
-    position: absolute;
-    color: #fff;
-    font-size: 20px;
-    animation: fall linear infinite;
-}
-
-@keyframes fall {
+/* Hiệu ứng tia nắng quay xung quanh vòng tròn */
+@keyframes ray {
     0% {
-        transform: translateY(-10vh);
+        transform: rotate(0deg) translateX(160px) rotate(0deg); /* Vị trí ngoài viền vòng tròn */
     }
     100% {
-        transform: translateY(100vh);
+        transform: rotate(360deg) translateX(160px) rotate(0deg); /* Quay quanh vòng tròn */
     }
 }
 
-.rose span {
-    position: absolute;
-    color: white;
-    font-size: 48px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+/* CSS cho dòng chữ "Good Morning" */
+#good-morning {
+    font-family: 'Dancing Script', cursive; /* Font chữ nghệ thuật */
+    font-size: 50px;  /* Kích thước chữ lớn hơn */
+    color: #ffffff;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    animation: heartbeat 2s infinite;
 }
 
-.rose:hover span {
-    opacity: 1;
-}
-
-#nextButton {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    background-color: #fff;
-    color: #ff1493;
-    border: none;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-#nextButton:hover {
-    background-color: #ff1493;
-    color: white;
-}
-
-/* CSS cho trang "heart" */
-#heartPage {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-}
-
-canvas {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-.message {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 3em;
-    color: #ea80b0;
-    text-align: center;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-}
-
-.heart {
-    display: inline-block;
-    color: red;
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-    0% {
+/* Hiệu ứng trái tim đập */
+@keyframes heartbeat {
+    0%, 100% {
         transform: scale(1);
     }
     50% {
         transform: scale(1.2);
     }
-    100% {
-        transform: scale(1);
+}
+
+/* CSS cho mặt trời 🌞 */
+.sun {
+    position: absolute;
+    color: #ffd700;
+    font-size: 60px; 
+    animation: float 3s ease-in-out infinite, pulsate 3s infinite;
+    will-change: transform, font-size;
+}
+
+/* Hiệu ứng nổi lên, nổi xuống */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
     }
 }
+
+/* Hiệu ứng mặt trời phóng to, thu nhỏ */
+@keyframes pulsate {
+    0%, 100% {
+        font-size: 60px;
+    }
+    50% {
+        font-size: 70px;
+    }
+}
+
+/* CSS cho hoa 🌻 ở hai bên của vòng tròn */
+.sun-flower {
+    position: absolute;
+    font-size: 40px;
+}
+
+.sun-flower-left {
+    left: -50px; /* Đặt hoa sang trái */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.sun-flower-right {
+    right: -50px; /* Đặt hoa sang phải */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 </style>
 </head>
 <body>
+<!-- Vòng tròn bao quanh dòng chữ "Good Morning" với các tia nắng -->
+<div class="sun-circle">
+    <!-- Các tia nắng xung quanh vòng tròn, được đưa ra ngoài viền -->
 
+    <div class="sun-ray" style="transform: rotate(180deg) translateX(160px) rotate(0deg);">🔆</div>
+
+
+    <!-- Biểu tượng hoa 🌻 ở hai bên vòng tròn -->
+    <div class="sun-flower sun-flower-left">🌻</div>
+    <div class="sun-flower sun-flower-right">🌻</div>
+
+    <!-- Dòng chữ Good Morning -->
+    <div id="good-morning">Good Morning</div>
+</div>
 
 <script>
-// Script tạo hiệu ứng tuyết rơi cho trang "index"
+// Tạo hiệu ứng mặt trời nổi lên, nổi xuống
 document.addEventListener("DOMContentLoaded", function () {
-    let container = document.querySelector("body");
-    let nextButton = document.getElementById("nextButton");
+    const container = document.body;
 
-    function createSnowflake() {
-        let snowflake = document.createElement("div");
-        snowflake.classList.add("snowflake");
-        snowflake.style.left = Math.random() * window.innerWidth + "px";
-        snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
-        snowflake.innerHTML = "😾  😡  👎  💢";
+    function createSun() {
+        const sun = document.createElement("div");
+        sun.classList.add("sun");
+        sun.innerHTML = "🌞";
 
-        container.appendChild(snowflake);
+        // Đặt vị trí ngẫu nhiên gần trung tâm màn hình
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2; // Xuất hiện gần đầu màn hình
+        const offsetX = 200; // Giới hạn vị trí ngang ±200px
+        const offsetY = 300; // Giới hạn vị trí dọc ±100px
 
+        const startX = centerX + (Math.random() * offsetX * 2 - offsetX); // Nằm trong khoảng ±offsetX
+        const startY = centerY + (Math.random() * offsetY * 2 - offsetY);
+
+        sun.style.left = `${startX}px`;
+        sun.style.top = `${startY}px`;
+        sun.style.position = "absolute";
+
+        container.appendChild(sun);
+
+        // Xóa mặt trời sau khi hoàn thành hiệu ứng
         setTimeout(() => {
-            snowflake.remove();
+            sun.remove();
         }, 5000);
     }
 
-    setInterval(createSnowflake, 100);
-
-    // Hiển thị từng chữ 'cink', 'ngoan', 'iu'
-    setTimeout(() => {
-        document.getElementById('cink').style.opacity = 1;
-    }, 500);
-    setTimeout(() => {
-        document.getElementById('ngoan').style.opacity = 1;
-    }, 1000);
-    setTimeout(() => {
-        document.getElementById('iu').style.opacity = 1;
-    }, 1500);
-    setTimeout(() => {
-        document.getElementById('cink').style.opacity = 0;
-        document.getElementById('ngoan').style.opacity = 0;
-        document.getElementById('iu').style.opacity = 0;
-    }, 4000);
-    // Sau 4 giây biến mất các dòng chữ, hiển thị tuần tự các hình ảnh
-    setTimeout(() => {
-        document.getElementById('cink').style.opacity = 0;
-        document.getElementById('ngoan').style.opacity = 0;
-        document.getElementById('iu').style.opacity = 0;
-
-        setTimeout(() => {
-            document.querySelectorAll('.rose img').forEach((img, index) => {
-                setTimeout(() => {
-                    img.style.opacity = 1;
-                }, index * 1000); // Hiển thị tuần tự mỗi hình ảnh sau 1 giây
-            });
-        }, 1000);
-
-    }, 4000);
-    // Khi bấm vào nút "Next", chuyển sang trang "heart"
-    nextButton.addEventListener("click", function () {
-        document.getElementById("indexPage").style.display = "none";
-        document.getElementById("heartPage").style.display = "block";
-        startHeartAnimation();
-    });
-
-    // Tự động chuyển trang sau 6 giây
-    setTimeout(() => {
-        nextButton.click();
-    }, 6000);
+    // Tạo mặt trời mỗi 1 giây
+    setInterval(createSun, 1000);
 });
 </script>
-
 </body>
 </html>
